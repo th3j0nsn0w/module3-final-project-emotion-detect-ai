@@ -1,11 +1,11 @@
-
 '''
 Emotion detection application using the Watson NLP library.
 '''
 
 import json
-import requests
 import operator
+import requests
+
 
 def emotion_detector(text_to_analyze):
     '''
@@ -26,6 +26,7 @@ def emotion_detector(text_to_analyze):
         json_response = json.loads(response.text)
         emotion_predictions = json_response['emotionPredictions']
         if emotion_predictions:
+            # What to do if there is more than one prediction?
             if len(emotion_predictions) == 1:
                 emotion_components = emotion_predictions[0]['emotion']
                 predominant_emotion = max(
@@ -33,9 +34,7 @@ def emotion_detector(text_to_analyze):
                 )[0] # get the emotion with the highest probability
 
                 emotion_components['dominant_emotion'] = predominant_emotion
-                
+
                 return emotion_components
-            else:
-                pass # TODO: What to do if there is more than one prediction?
 
     return {'emotion': None}
