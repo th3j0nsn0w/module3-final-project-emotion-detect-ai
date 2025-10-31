@@ -31,8 +31,10 @@ def emotion_detector(text_to_analyze):
                 predominant_emotion = max(
                     emotion_components.items(), key=operator.itemgetter(1)
                 )[0] # get the emotion with the highest probability
+
+                emotion_components['dominant_emotion'] = predominant_emotion
                 
-                return {'emotion': predominant_emotion}
+                return emotion_components
             else:
                 pass # TODO: What to do if there is more than one prediction?
 
