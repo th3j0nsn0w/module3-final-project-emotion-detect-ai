@@ -15,7 +15,7 @@ def detect_emotion():
     text_to_analyze = request.args.get('textToAnalyze')
     if text_to_analyze:
         emotion_info = emotion_detector(text_to_analyze)
-        if emotion_info:
+        if emotion_info and emotion_info['dominant_emotion']:
             emotion_response = (
                 f"For the given statement, the system response is 'anger': "
                 f"{ emotion_info['anger'] }, 'disgust': { emotion_info['disgust'] }, 'fear': "
@@ -26,7 +26,7 @@ def detect_emotion():
 
             return emotion_response
 
-    return "Text is not valid." if text_to_analyze else "Empty text! Nothing to analyze."
+    return "Invalid text! Please try again!."
 
 @app.route("/")
 def render_index_page():
